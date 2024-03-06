@@ -1,0 +1,19 @@
+.header {
+  border: none;
+  border-radius: 0px 0px 50px 50px;
+  background-color: rgb(14, 14, 14);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25), 0 6px 20px rgba(0, 0, 0, 0.23);
+
+  &_flex {
+    display: flex;
+    height: 75px;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: 30px;
+      line-height: 35px;
+      text-align: center;
+    }
+  }
+}
