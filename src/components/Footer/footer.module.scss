@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .footer {
   border: none;
   border-radius: 50px 50px 0px 0px;
@@ -5,10 +7,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25), 0 -4px 8px rgba(0, 0, 0, 0.25);
 
   &_flex {
-    display: flex;
+    @include displayCenter();
     height: 50px;
-    justify-content: center;
-    align-items: center;
 
     span {
       font-size: 20px;
