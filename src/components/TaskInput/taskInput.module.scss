@@ -1,6 +1,30 @@
-.input {
-  border: none;
-  border-radius: 5px;
+@import '../../styles/variables.scss';
+
+.inputBlock {
+  @include displayCenter();
+  position: relative;
   margin-bottom: 10px;
-  padding: 5px;
+
+  &_input {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 30px 5px 5px;
+  
+    &:focus {
+      transition: all .3s;
+    }
+  }
+
+  &_addBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    font-size: 25px;
+    line-height: 25px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+  }
 }

@@ -6,7 +6,7 @@ const TodoList: React.FC = () => {
   return (
     <div className={styles.todo}>
       <div className={styles.todo_flex}>
-        <h3 className={styles.todo_flex_title}>Tasks:</h3>
+        <h3 className={styles.todo_flex_top_title}>Tasks:</h3>
         <TaskInput />
         <Tasks />
       </div>
