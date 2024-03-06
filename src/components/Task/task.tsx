@@ -1,7 +1,7 @@
-import styles from './task.module.scss';
 import { MdDelete } from "react-icons/md";
+import styles from './task.module.scss';
 
-const task: React.FC = () => {
+const Task: React.FC = () => {
   return (
     <div className={styles.task}>
       <p className={styles.task_text}>task</p>
@@ -12,4 +12,4 @@ const task: React.FC = () => {
   );
 };
 
-export default task;
+export default Task;

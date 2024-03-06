@@ -1,15 +1,17 @@
 import Tasks from '../Task/task';
+import TaskInput from '../TaskInput/taskInput';
 import styles from './todoList.module.scss';
 
-const todoList: React.FC = () => {
+const TodoList: React.FC = () => {
   return (
     <div className={styles.todo}>
       <div className={styles.todo_flex}>
         <h3 className={styles.todo_flex_title}>Tasks:</h3>
+        <TaskInput />
         <Tasks />
       </div>
     </div>
   );
 };
 
-export default todoList;
+export default TodoList;
