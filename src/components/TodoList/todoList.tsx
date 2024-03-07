@@ -1,7 +1,8 @@
+import { BiTaskX } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../redux/hooks/actionsHook';
-import { setInputValue } from '../../redux/todosSlise';
+import { setInputValue, setTodos } from '../../redux/todosSlise';
 import Task from '../Task/Task';
 import TaskInput from '../TaskInput/TaskInput';
 
@@ -11,7 +12,7 @@ import styles from './TodoList.module.scss';
 
 export default function TodoList() {
   const dispatch = useDispatch();
-  const { inputValue } = useAppSelector((state: RootState) => state.todosSlice);
+  const { todos, inputValue } = useAppSelector((state: RootState) => state.todosSlice);
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setInputValue(event.target.value));
@@ -20,12 +21,24 @@ export default function TodoList() {
   const onSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (inputValue.length !== 0) {
+      dispatch(setTodos(inputValue));
+    }
+
     dispatch(setInputValue(''));
   };
 
   const onClickSubmit = () => {
+    if (inputValue.length !== 0) {
+      dispatch(setTodos(inputValue));
+    }
+
     dispatch(setInputValue(''));
   };
+
+  // const onClickDelete = () => {
+
+  // };
 
   return (
     <div className={styles.todo}>
@@ -37,7 +50,17 @@ export default function TodoList() {
           onSubmitForm={onSubmitForm}
           onClickSubmit={onClickSubmit}
         />
-        <Task />
+        {todos.length ? todos.map((todo) => (
+          <Task
+            key={todo}
+            todo={todo}
+          />
+        )) : (
+          <div className={styles.todo_flex_bottom}>
+            <span>You dont have tasks</span>
+            <BiTaskX className={styles.todo_flex_bottom_icon} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import type { IPropsForm } from './IPropsTaskInput';
+import type { IPropsTaskInput } from './IPropsTaskInput';
 
 import styles from './TaskInput.module.scss';
 
@@ -7,7 +7,7 @@ export default function TaskInput({
   onChangeInput,
   onSubmitForm,
   onClickSubmit,
-}: IPropsForm) {
+}: IPropsTaskInput) {
   return (
     <form
       onSubmit={onSubmitForm}
