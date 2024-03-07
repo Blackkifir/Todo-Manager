@@ -3,16 +3,13 @@
 .inputBlock {
   @include displayCenter();
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 
   &_input {
     border: none;
     border-radius: 5px;
-    padding: 5px 30px 5px 5px;
-  
-    &:focus {
-      transition: all .3s;
-    }
+    width: 300px;
+    padding: 10px 35px 10px 10px;
   }
 
   &_addBtn {
@@ -21,10 +18,10 @@
     right: 0;
     border: none;
     background-color: transparent;
-    font-size: 25px;
-    line-height: 25px;
-    width: 26px;
-    height: 26px;
+    font-size: 27px;
+    line-height: 27px;
+    width: 36px;
+    height: 36px;
     cursor: pointer;
   }
 }
