@@ -1,26 +1,13 @@
-import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../redux/hooks/actionsHook';
-import { RootState } from '../../redux/store';
-import { setInputValue } from '../../redux/todosSlise';
-import styles from './taskInput.module.scss';
+import type { IPropsForm } from './IPropsTaskInput';
 
-const TaskInput: React.FC = () => {
-  const dispatch = useDispatch();
-  const inputValue = useAppSelector((state: RootState) => state.todosSlice.inputValue);
-  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setInputValue(event.target.value));
-  };
+import styles from './TaskInput.module.scss';
 
-  const onClickSubmit = () => {
-    dispatch(setInputValue(''));
-  }
-
-  const onSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    dispatch(setInputValue(''));
-  };
-
+export default function TaskInput({
+  inputValue,
+  onChangeInput,
+  onSubmitForm,
+  onClickSubmit,
+}: IPropsForm) {
   return (
     <form
       onSubmit={onSubmitForm}
@@ -37,11 +24,10 @@ const TaskInput: React.FC = () => {
       <button
         onClick={onClickSubmit}
         type="button"
-        className={styles.inputForm_addBtn}>
+        className={styles.inputForm_addBtn}
+      >
         +
       </button>
     </form>
   );
-};
-
-export default TaskInput;
+}

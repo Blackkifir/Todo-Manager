@@ -1,12 +1,11 @@
-import TodoList from '../components/TodoList/todoList';
-import styles from './home.module.scss';
+import TodoList from '../components/TodoList/TodoList';
 
-const Home: React.FC = () => {
+import styles from './Home.module.scss';
+
+export default function Home() {
   return (
     <main className={styles.main}>
       <TodoList />
     </main>
   );
-};
-
-export default Home;
+}

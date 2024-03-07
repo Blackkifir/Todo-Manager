@@ -1,11 +1,12 @@
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import Home from './layout/Home';
+
 import './styles/globals.css';
-import Footer from './components/Footer/footer';
-import Header from './components/Header/header';
-import Home from './layout/home';
 
 function App() {
   return (
-    <div className='wrapper'>
+    <div className="wrapper">
       <Header />
       <Home />
       <Footer />

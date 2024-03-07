@@ -1,6 +1,6 @@
-import styles from './header.module.scss';
+import styles from './Header.module.scss';
 
-const Header: React.FC = () => {
+export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.header_flex}>
@@ -8,6 +8,4 @@ const Header: React.FC = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}

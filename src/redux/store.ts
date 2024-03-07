@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import todosSlice from './todosSlise';
 
 const store = configureStore({

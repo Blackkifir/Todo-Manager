@@ -1,118 +1,80 @@
 {
-  "extends": [
-    "plugin:unicorn/recommended",
-    "plugin:promise/recommended",
-    "plugin:sonarjs/recommended",
-    "standard"
-  ],
-  "plugins": ["unicorn", "sonarjs"],
-  "rules": {
-    "arrow-parens": ["error", "always"],
-    "nonblock-statement-body-position": ["error", "beside"],
-    "computed-property-spacing": ["error", "never"],
-    "array-bracket-spacing": ["error", "never"],
-    "object-curly-spacing": ["error", "always"],
-    "quote-props": ["error", "always"],
-    "implicit-arrow-linebreak": ["error", "beside"],
-    "semi": ["error", "never"],
-    "comma-dangle": ["error", "always-multiline"],
-    "function-paren-newline": ["error", "consistent"],
-    "lines-between-class-members": ["error", "always"],
-    "space-before-function-paren": ["error", {
-      "named": "never",
-      "anonymous": "always",
-      "asyncArrow": "always"
-    }],
-    "multiline-ternary": ["error", "never"],
-    "no-nested-ternary": "error",
-    "operator-assignment": ["error", "always"],
-    "for-direction": "error",
-    "no-lonely-if": "error",
-    "no-else-return": ["error", { "allowElseIf": false }],
-    "no-empty": "error",
-    "no-labels": "error",
-    "no-extra-label": "error",
-    "no-loop-func": "error",
-    "no-bitwise": "error",
-    "no-multi-assign": "error",
-    "no-plusplus": "error",
-    "no-shadow": "error",
-    "func-name-matching": ["error", "always"],
-    "no-native-reassign": "error",
-    "consistent-this": ["error", "self"],
-    "no-catch-shadow": "error",
-    "no-underscore-dangle": "error",
-    "no-unused-vars": ["error", {
-      "varsIgnorePattern": "^_",
-      "caughtErrorsIgnorePattern": "^_",
-      "argsIgnorePattern": "^_"
-    }],
-    "id-length": ["error", { "min": 2 }],
-    "unicorn/filename-case": ["error", { "case": "kebabCase" }],
-    "consistent-return": "error",
-    "getter-return": "error",
-    "prefer-template": "error",
-    "no-useless-concat": "error",
-    "unicorn/numeric-separators-style": ["error", { "onlyIfContainsSeparator": true }],
-    "require-yield": "error",
-    "no-async-promise-executor": "error",
-    "require-atomic-updates": "error",
-    "no-case-declarations": "error",
-    "default-case": ["error", { "commentPattern": "^no default$" }],
-    "require-unicode-regexp": "error",
-    "no-misleading-character-class": "error",
-    "multiline-comment-style": ["error", "separate-lines"],
-    "no-console": "error",
-    "no-debugger": "error",
-    "no-alert": "error",
-    "complexity": ["error", { "max": 6 }],
-    "max-len": ["error", {
-      "code": 80,
-      "ignoreComments": false,
-      "ignoreTrailingComments": false,
-      "ignoreUrls": false,
-      "ignoreStrings": false,
-      "ignoreTemplateLiterals": false,
-      "ignoreRegExpLiterals": false
-    }],
-    "max-statements": ["error", 10, { "ignoreTopLevelFunctions": true }],
-    "max-depth": ["error", { "max": 4 }],
-    "max-params": ["error", { "max": 5 }],
-    "max-nested-callbacks": ["error", { "max": 3 }],
-    "max-classes-per-file": ["error", 3],
-    "no-void": "error",
-    "prefer-arrow-callback": "error",
-    "no-confusing-arrow": ["error", { "allowParens": false }],
-    "prefer-rest-params": "error",
-    "object-shorthand": "error",
-    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-    "no-var": "error",
-    "prefer-const": ["error", { "ignoreReadBeforeAssign": false }],
-    "vars-on-top": "error",
-    "no-implicit-coercion": "error",
-    "dot-notation": "error",
-    "guard-for-in": "error",
-    "radix": "error",
-    "no-div-regex": "error",
-    "prefer-object-spread": "error",
-    "no-empty-function": ["error", {
-      "allow": [
-        "arrowFunctions",
-        "functions",
-        "methods"
-      ]
-    }],
-    "promise/prefer-await-to-then": "error",
-    "promise/prefer-await-to-callbacks": "error",
-    "promise/no-nesting": "error",
-    "promise/no-return-in-finally": "error",
-    "unicorn/prevent-abbreviations": "off",
-    "unicorn/prefer-module": "off"
+  "env": {
+    "browser": true,
+    "es2021": true
   },
-  "overrides": [{
-    "files": ["*.vue"],
-    "rules": {
-      "unicorn/filename-case": ["error", { "case": "pascalCase" }]
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:import/typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "require-explicit-generics",
+    "simple-import-sort"
+  ],
+  "rules": {
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state", "res"] }],
+    "jsx-a11y/label-has-for": "off",
+    "max-len": ["error", {
+        "code": 120,
+        "ignorePattern": "^import"
+    }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/__tests__/**", "**/*.test.ts", "**/*.test.tsx"]}],
+    "require-explicit-generics/require-explicit-generics": [
+        "error",
+        ["builder.query", "builder.mutation"]
+      ],
+    "simple-import-sort/imports": ["error", {
+      "groups": [
+        ["^\\u0000"], // side effect imports
+        ["^react$", "^react-native$", "^react", "^@?\\w"], // libraries order
+        ["^\\.\\.(?!/?$)", "^\\.\\./?$", // parent
+          "^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"], // other relations
+        ["^@?\\w.*\\u0000$", "^[^.].*\\u0000$", "^\\..*\\u0000$"], // types
+        ["^.+assets.+\\..+$"], // assets
+        ["^.+\\.s?css$"]] // style
+    }],
+    "import/order": "off", // disable default import order rule to use simple-import-sort
+    "radix": "off",
+    "react/jsx-props-no-spreading": ["error", {
+      "exceptions": ["input", "**/*.stories.tsx"]
+    }],
+    "react/jsx-uses-react": "off", // https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#eslint
+    "react/react-in-jsx-scope": "off", // https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#eslint
+    "react/jsx-no-leaked-render": "error",
+    "react/jsx-handler-names": ["error", {
+      "checkLocalVariables": true,
+      "eventHandlerPrefix": "on"
+    }],
+    "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/consistent-type-imports": "error"
+  },
+  "overrides": [
+    {
+      "files": ["src/**/**/slice.ts"],
+      "rules": {
+        "no-param-reassign": ["error", { "props": false }]
+      }
+    },
+    {
+      "files": ["**/*.stories.*"],
+      "rules": {
+        "react/jsx-props-no-spreading": "off",
+        "import/no-anonymous-default-export": "off"
+      }
     }
-  }]
+  ]
 }

@@ -1,22 +1,21 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  todos: [],
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { IPropsTodosSlice } from './IPropsTodosSlice';
+
+const initialState: IPropsTodosSlice = {
   inputValue: '',
-}
+};
 
-export const todosSlice = createSlice({
+const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    setTodos(state, action) {
-      state.todos = action.payload;
-    },
     setInputValue(state, action: PayloadAction<string>) {
       state.inputValue = action.payload;
-    }
-  }
+    },
+  },
 });
 
-export const { setTodos, setInputValue } = todosSlice.actions;
+export const { setInputValue } = todosSlice.actions;
 export default todosSlice.reducer;
