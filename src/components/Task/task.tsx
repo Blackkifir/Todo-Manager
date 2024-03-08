@@ -28,7 +28,7 @@ export default function Task({
         type="checkbox"
         className={styles.task_checkBox}
       />
-      <p className={styles.task_text}>{todo}</p>
+      <p className={`${isChecked ? styles.task_complete : styles.task_text}`}>{todo}</p>
       <button
         onClick={() => onClickDelete(id)}
         type="button"

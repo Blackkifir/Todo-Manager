@@ -5,6 +5,7 @@ import { useAppSelector } from '../../redux/hooks/actionsHook';
 import {
   setDeleteTodo,
   setInputValue,
+  setIsTooLong,
   setTodos,
 } from '../../redux/todosSlise';
 import Task from '../Task/Task';
@@ -16,7 +17,7 @@ import styles from './TodoList.module.scss';
 
 export default function TodoList() {
   const dispatch = useDispatch();
-  const { todos, inputValue } = useAppSelector((state: RootState) => state.todosSlice);
+  const { isTooLong, todos, inputValue } = useAppSelector((state: RootState) => state.todosSlice);
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setInputValue(event.target.value));
@@ -26,7 +27,15 @@ export default function TodoList() {
     event.preventDefault();
 
     if (inputValue.length !== 0) {
-      dispatch(setTodos(inputValue));
+      if (inputValue.length < 40) {
+        dispatch(setTodos(inputValue));
+      } else {
+        dispatch(setIsTooLong(true));
+
+        setTimeout(() => {
+          dispatch(setIsTooLong(false));
+        }, 2000);
+      }
     }
 
     dispatch(setInputValue(''));
@@ -52,6 +61,7 @@ export default function TodoList() {
         </h3>
         <TaskInput
           inputValue={inputValue}
+          isTooLong={isTooLong}
           onChangeInput={onChangeInput}
           onSubmitForm={onSubmitForm}
           onClickSubmit={onClickSubmit}

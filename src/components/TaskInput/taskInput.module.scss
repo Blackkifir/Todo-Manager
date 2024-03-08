@@ -2,14 +2,22 @@
 
 .inputForm {
   @include displayCenter();
+  flex-direction: column;
   position: relative;
   margin-bottom: 30px;
 
   &_input {
+    margin-bottom: 5px;
     border: none;
     border-radius: 5px;
     width: 300px;
     padding: 10px 35px 10px 10px;
+  }
+
+  &_tooLong {
+    font-size: 17px;
+    line-height: 20px;
+    color: rgb(255, 14, 1);
   }
 
   &_addBtn {

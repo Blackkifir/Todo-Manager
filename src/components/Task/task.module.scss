@@ -26,6 +26,12 @@
     font-size: 17px;
     line-height: 20px;
   }
+  &_complete {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: line-through;
+  }
 
   &_btnDelete {
     position: absolute;
@@ -42,7 +48,7 @@
     }
     &_icon:hover {
       transition: all .2s;
-      color: rgba(177, 15, 6, 0.8)
+      color: rgba(177, 15, 6, 0.8);
     }
   }
 }
