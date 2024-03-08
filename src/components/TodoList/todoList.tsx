@@ -23,9 +23,7 @@ export default function TodoList() {
     dispatch(setInputValue(event.target.value));
   };
 
-  const onSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const reviewOfConditions = () => {
     if (inputValue.length !== 0) {
       if (inputValue.length < 40) {
         dispatch(setTodos(inputValue));
@@ -37,16 +35,16 @@ export default function TodoList() {
         }, 2000);
       }
     }
-
     dispatch(setInputValue(''));
   };
 
-  const onClickSubmit = () => {
-    if (inputValue.length !== 0) {
-      dispatch(setTodos(inputValue));
-    }
+  const onSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    reviewOfConditions();
+  };
 
-    dispatch(setInputValue(''));
+  const onClickSubmit = () => {
+    reviewOfConditions();
   };
 
   const onClickDelete = (id: number) => {

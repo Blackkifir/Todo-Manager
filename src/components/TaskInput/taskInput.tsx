@@ -21,7 +21,11 @@ export default function TaskInput({
         className={styles.inputForm_input}
       />
       {isTooLong ? <p className={styles.inputForm_tooLong}>Too long words</p> : null}
-      <button onClick={onClickSubmit} type="button" className={styles.inputForm_addBtn}>
+      <button
+        onClick={onClickSubmit}
+        type="button"
+        className={styles.inputForm_addBtn}
+      >
         +
       </button>
     </form>
