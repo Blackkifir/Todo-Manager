@@ -11,6 +11,7 @@ export default function TaskInput({
   return (
     <form
       onSubmit={onSubmitForm}
+      name="todos"
       className={styles.inputForm}
     >
       <input

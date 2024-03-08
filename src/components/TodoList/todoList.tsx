@@ -2,7 +2,7 @@ import { BiTaskX } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../redux/hooks/actionsHook';
-import { setInputValue, setTodos } from '../../redux/todosSlise';
+import { setDeleteTodo, setInputValue, setTodos } from '../../redux/todosSlise';
 import Task from '../Task/Task';
 import TaskInput from '../TaskInput/TaskInput';
 
@@ -36,9 +36,9 @@ export default function TodoList() {
     dispatch(setInputValue(''));
   };
 
-  // const onClickDelete = () => {
-
-  // };
+  const onClickDelete = (id: number) => {
+    dispatch(setDeleteTodo(id));
+  };
 
   return (
     <div className={styles.todo}>
@@ -50,10 +50,12 @@ export default function TodoList() {
           onSubmitForm={onSubmitForm}
           onClickSubmit={onClickSubmit}
         />
-        {todos.length ? todos.map((todo) => (
+        {todos.length ? todos.map((todo, index) => (
           <Task
-            key={todo}
+            id={index}
+            key={`${todo + index}`}
             todo={todo}
+            onClickDelete={onClickDelete}
           />
         )) : (
           <div className={styles.todo_flex_bottom}>
