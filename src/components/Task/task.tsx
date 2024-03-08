@@ -1,13 +1,33 @@
+import { useState } from 'react';
 import { MdDelete } from 'react-icons/md';
 
 import type { IPropsTask } from './IPropsTask';
 
 import styles from './Task.module.scss';
 
-export default function Task({ todo, onClickDelete, id }: IPropsTask) {
+export default function Task({
+  id,
+  todo,
+  onClickDelete,
+}: IPropsTask) {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  const onChangeChecked = () => {
+    setIsChecked(true);
+
+    if (isChecked) {
+      setIsChecked(false);
+    }
+  };
+
   return (
     <div className={styles.task}>
-      <input type="checkbox" className={styles.task_checkBox} />
+      <input
+        onChange={onChangeChecked}
+        checked={isChecked}
+        type="checkbox"
+        className={styles.task_checkBox}
+      />
       <p className={styles.task_text}>{todo}</p>
       <button
         onClick={() => onClickDelete(id)}

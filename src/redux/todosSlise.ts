@@ -7,6 +7,7 @@ const initialState: IPropsTodosSlice = {
   id: 0,
   todos: [],
   inputValue: '',
+  isChecked: false,
 };
 
 const todosSlice = createSlice({
@@ -25,8 +26,16 @@ const todosSlice = createSlice({
     setDeleteTodo(state, action: PayloadAction<number>) {
       state.todos = state.todos.filter((_, index) => index !== action.payload);
     },
+    setIsChecked(state, action: PayloadAction<boolean>) {
+      state.isChecked = action.payload;
+    },
   },
 });
 
-export const { setInputValue, setTodos, setDeleteTodo } = todosSlice.actions;
+export const {
+  setInputValue,
+  setTodos,
+  setDeleteTodo,
+  setIsChecked,
+} = todosSlice.actions;
 export default todosSlice.reducer;

@@ -2,7 +2,11 @@ import { BiTaskX } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../redux/hooks/actionsHook';
-import { setDeleteTodo, setInputValue, setTodos } from '../../redux/todosSlise';
+import {
+  setDeleteTodo,
+  setInputValue,
+  setTodos,
+} from '../../redux/todosSlise';
 import Task from '../Task/Task';
 import TaskInput from '../TaskInput/TaskInput';
 
@@ -43,7 +47,9 @@ export default function TodoList() {
   return (
     <div className={styles.todo}>
       <div className={styles.todo_flex}>
-        <h3 className={styles.todo_flex_top_title}>Tasks:</h3>
+        <h3 className={styles.todo_flex_top_title}>
+          {`Tasks:${' '} ${todos.length}`}
+        </h3>
         <TaskInput
           inputValue={inputValue}
           onChangeInput={onChangeInput}
