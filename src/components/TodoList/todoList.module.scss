@@ -2,6 +2,7 @@
 
 .todo {
   @include displayCenter();
+  position: relative;
   border: none;
   border-radius: 15px;
   width: 100%;
@@ -25,6 +26,7 @@
 
     &_bottom {
       @include displayCenter();
+      margin-bottom: 20px;
       font-size: 17px;
       font-weight: 700;
       line-height: 20px;

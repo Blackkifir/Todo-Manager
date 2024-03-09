@@ -8,6 +8,7 @@ import {
   setIsTooLong,
   setTodos,
 } from '../../redux/todosSlise';
+import BottomPanel from '../BottomPanel/BottomPanel';
 import Task from '../Task/Task';
 import TaskInput from '../TaskInput/TaskInput';
 
@@ -55,7 +56,7 @@ export default function TodoList() {
     <div className={styles.todo}>
       <div className={styles.todo_flex}>
         <h3 className={styles.todo_flex_top_title}>
-          {`Tasks:${' '} ${todos.length}`}
+          The Panel Tasks
         </h3>
         <TaskInput
           inputValue={inputValue}
@@ -77,6 +78,7 @@ export default function TodoList() {
             <BiTaskX className={styles.todo_flex_bottom_icon} />
           </div>
         )}
+        <BottomPanel />
       </div>
     </div>
   );
