@@ -7,6 +7,8 @@ const initialState: IPropsTodosSlice = {
   todos: [],
   inputValue: '',
   tooLong: false,
+  completedTasks: 0,
+  notCompletedTasks: 0,
 };
 
 const todosSlice = createSlice({
@@ -21,9 +23,16 @@ const todosSlice = createSlice({
     },
     setTodos(state, action: PayloadAction<IPropsTodo[]>) {
       state.todos = action.payload;
+      state.inputValue = '';
     },
     setDeleteTodo(state, action: PayloadAction<string>) {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+    },
+    setCompletedTasks(state, action: PayloadAction<number>) {
+      state.completedTasks = action.payload;
+    },
+    setNotCompletedTasks(state, action: PayloadAction<number>) {
+      state.notCompletedTasks = action.payload;
     },
   },
 });
@@ -33,5 +42,7 @@ export const {
   setTodos,
   setTooLong,
   setDeleteTodo,
+  setCompletedTasks,
+  setNotCompletedTasks,
 } = todosSlice.actions;
 export default todosSlice.reducer;

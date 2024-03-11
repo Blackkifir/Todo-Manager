@@ -43,7 +43,6 @@ export default function TodoList() {
         }, 2000);
       }
     }
-    dispatch(setInputValue(''));
   };
 
   const onSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {

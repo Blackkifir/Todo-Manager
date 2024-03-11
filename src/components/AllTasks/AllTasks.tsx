@@ -1,13 +1,32 @@
+import { useEffect } from 'react';
 import { FaTasks } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../redux/hooks/actionsHook';
+import { setCompletedTasks, setNotCompletedTasks } from '../../redux/todosSlise';
 
 import type { RootState } from '../../redux/store';
 
 import styles from './AllTasks.module.scss';
 
 export default function AllTasks() {
-  const { todos } = useAppSelector((state: RootState) => state.todosSlice);
+  const dispatch = useDispatch();
+  const { todos, completedTasks, notCompletedTasks } = useAppSelector((state: RootState) => state.todosSlice);
+
+  useEffect(() => {
+    const sumCompletedTasks = todos.reduce((acc: number, currentTodo) => {
+      const sum = currentTodo.isChecked ? acc + 1 : acc;
+      return sum;
+    }, 0);
+    dispatch(setCompletedTasks(sumCompletedTasks));
+
+    const sumNotCompletedTasks = todos.reduce((acc: number, currentTodo) => {
+      const sum = !currentTodo.isChecked ? acc + 1 : acc;
+      return sum;
+    }, 0);
+    dispatch(setNotCompletedTasks(sumNotCompletedTasks));
+  }, [todos, dispatch]);
+
   return (
     <div className={styles.allTasks}>
       <div className={styles.allTasks_flex}>
@@ -23,10 +42,10 @@ export default function AllTasks() {
             <p>{`Tasks: ${todos.length}`}</p>
           </li>
           <li className={styles.allTasks_flex_list_item}>
-            <p>{`Tasks completed: ${0}`}</p>
+            <p>{`Tasks completed: ${completedTasks}`}</p>
           </li>
           <li className={styles.allTasks_flex_list_item}>
-            <p>{`Not completed: ${0}`}</p>
+            <p>{`Not completed: ${notCompletedTasks}`}</p>
           </li>
         </ul>
       </div>
