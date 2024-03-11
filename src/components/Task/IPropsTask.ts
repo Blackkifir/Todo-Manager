@@ -1,5 +1,7 @@
+import type { IPropsTodo } from '../../redux/types/IPropsTodosSlice';
+
 export type IPropsTask = {
-  id: number,
-  todo: string,
-  onClickDelete: (id: number) => void;
+  todo: IPropsTodo,
+  onChangeChecked: (id: string) => void;
+  onClickDeleteTodo: (id: string) => void;
 };

@@ -1,6 +1,11 @@
 export type IPropsTodosSlice = {
-  id: number,
-  todos: string[],
+  todos: IPropsTodo[],
   inputValue: string,
-  isTooLong: boolean,
+  tooLong: boolean,
 };
+
+export interface IPropsTodo {
+  id: string,
+  text: string,
+  isChecked: boolean,
+}

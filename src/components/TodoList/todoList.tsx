@@ -1,14 +1,15 @@
 import { BiTaskX } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useAppSelector } from '../../redux/hooks/actionsHook';
 import {
   setDeleteTodo,
   setInputValue,
-  setIsTooLong,
   setTodos,
+  setTooLong,
 } from '../../redux/todosSlise';
-import BottomPanel from '../BottomPanel/BottomPanel';
+import AllTheTasks from '../AllTasks/AllTasks';
 import Task from '../Task/Task';
 import TaskInput from '../TaskInput/TaskInput';
 
@@ -18,7 +19,7 @@ import styles from './TodoList.module.scss';
 
 export default function TodoList() {
   const dispatch = useDispatch();
-  const { isTooLong, todos, inputValue } = useAppSelector((state: RootState) => state.todosSlice);
+  const { tooLong, todos, inputValue } = useAppSelector((state: RootState) => state.todosSlice);
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setInputValue(event.target.value));
@@ -27,12 +28,18 @@ export default function TodoList() {
   const reviewOfConditions = () => {
     if (inputValue.length !== 0) {
       if (inputValue.length < 40) {
-        dispatch(setTodos(inputValue));
+        const newTodo = {
+          id: uuidv4(),
+          text: inputValue,
+          isChecked: false,
+        };
+        const updatedTodos = [...todos, newTodo];
+        dispatch(setTodos(updatedTodos));
       } else {
-        dispatch(setIsTooLong(true));
+        dispatch(setTooLong(true));
 
         setTimeout(() => {
-          dispatch(setIsTooLong(false));
+          dispatch(setTooLong(false));
         }, 2000);
       }
     }
@@ -48,7 +55,14 @@ export default function TodoList() {
     reviewOfConditions();
   };
 
-  const onClickDelete = (id: number) => {
+  const onChangeChecked = (id: string) => {
+    const updatedTodos = todos.map((todo) => (
+      todo.id === id ? { ...todo, isChecked: !todo.isChecked } : todo
+    ));
+    dispatch(setTodos(updatedTodos));
+  };
+
+  const onClickDeleteTodo = (id: string) => {
     dispatch(setDeleteTodo(id));
   };
 
@@ -60,17 +74,17 @@ export default function TodoList() {
         </h3>
         <TaskInput
           inputValue={inputValue}
-          isTooLong={isTooLong}
+          isTooLong={tooLong}
           onChangeInput={onChangeInput}
           onSubmitForm={onSubmitForm}
           onClickSubmit={onClickSubmit}
         />
-        {todos.length ? todos.map((todo, index) => (
+        {todos.length ? todos.map((todo) => (
           <Task
-            id={index}
-            key={`${todo + index}`}
+            key={todo.id}
             todo={todo}
-            onClickDelete={onClickDelete}
+            onChangeChecked={onChangeChecked}
+            onClickDeleteTodo={onClickDeleteTodo}
           />
         )) : (
           <div className={styles.todo_flex_bottom}>
@@ -78,7 +92,7 @@ export default function TodoList() {
             <BiTaskX className={styles.todo_flex_bottom_icon} />
           </div>
         )}
-        <BottomPanel />
+        <AllTheTasks />
       </div>
     </div>
   );
