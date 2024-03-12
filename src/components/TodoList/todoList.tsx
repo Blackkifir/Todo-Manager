@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BiTaskX } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,6 +15,7 @@ import Task from '../Task/Task';
 import TaskInput from '../TaskInput/TaskInput';
 
 import type { RootState } from '../../redux/store';
+import type { IPropsTodo } from '../../redux/types/IPropsTodosSlice';
 
 import styles from './TodoList.module.scss';
 
@@ -21,11 +23,22 @@ export default function TodoList() {
   const dispatch = useDispatch();
   const { tooLong, todos, inputValue } = useAppSelector((state: RootState) => state.todosSlice);
 
-  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const storageTodos = localStorage.getItem('todoList');
+    if (storageTodos) {
+      dispatch(setTodos(JSON.parse(storageTodos)));
+    }
+  }, [dispatch]);
+
+  const setTodosStorage = (updatedTodos: IPropsTodo[]): void => {
+    localStorage.setItem('todoList', JSON.stringify(updatedTodos));
+  };
+
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setInputValue(event.target.value));
   };
 
-  const reviewOfConditions = () => {
+  const reviewOfConditions = (): void => {
     if (inputValue.length !== 0) {
       if (inputValue.length < 40) {
         const newTodo = {
@@ -35,6 +48,7 @@ export default function TodoList() {
         };
         const updatedTodos = [...todos, newTodo];
         dispatch(setTodos(updatedTodos));
+        setTodosStorage(updatedTodos);
       } else {
         dispatch(setTooLong(true));
 
@@ -45,23 +59,24 @@ export default function TodoList() {
     }
   };
 
-  const onSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitForm = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     reviewOfConditions();
   };
 
-  const onClickSubmit = () => {
+  const onClickSubmit = (): void => {
     reviewOfConditions();
   };
 
-  const onChangeChecked = (id: string) => {
+  const onChangeChecked = (id: string): void => {
     const updatedTodos = todos.map((todo) => (
       todo.id === id ? { ...todo, isChecked: !todo.isChecked } : todo
     ));
     dispatch(setTodos(updatedTodos));
+    setTodosStorage(updatedTodos);
   };
 
-  const onClickDeleteTodo = (id: string) => {
+  const onClickDeleteTodo = (id: string): void => {
     dispatch(setDeleteTodo(id));
   };
 

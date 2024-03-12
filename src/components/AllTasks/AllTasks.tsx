@@ -14,16 +14,18 @@ export default function AllTasks() {
   const { todos, completedTasks, notCompletedTasks } = useAppSelector((state: RootState) => state.todosSlice);
 
   useEffect(() => {
-    const sumCompletedTasks = todos.reduce((acc: number, currentTodo) => {
-      const sum = currentTodo.isChecked ? acc + 1 : acc;
-      return sum;
-    }, 0);
-    dispatch(setCompletedTasks(sumCompletedTasks));
+    const { sumCompletedTasks, sumNotCompletedTasks } = todos.reduce((acc, currentTodo) => {
+      const newAcc = { ...acc };
+      if (currentTodo.isChecked) {
+        newAcc.sumCompletedTasks += 1;
+      } else {
+        newAcc.sumNotCompletedTasks += 1;
+      }
 
-    const sumNotCompletedTasks = todos.reduce((acc: number, currentTodo) => {
-      const sum = !currentTodo.isChecked ? acc + 1 : acc;
-      return sum;
-    }, 0);
+      return newAcc;
+    }, { sumCompletedTasks: 0, sumNotCompletedTasks: 0 });
+
+    dispatch(setCompletedTasks(sumCompletedTasks));
     dispatch(setNotCompletedTasks(sumNotCompletedTasks));
   }, [todos, dispatch]);
 

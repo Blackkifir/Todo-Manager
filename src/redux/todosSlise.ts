@@ -27,6 +27,7 @@ const todosSlice = createSlice({
     },
     setDeleteTodo(state, action: PayloadAction<string>) {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+      localStorage.setItem('todoList', JSON.stringify(state.todos));
     },
     setCompletedTasks(state, action: PayloadAction<number>) {
       state.completedTasks = action.payload;

@@ -12,6 +12,7 @@ export default function TaskInput({
   return (
     <form onSubmit={onSubmitForm} name="todos" className={styles.inputForm}>
       <input
+        id="addTodoInput"
         onChange={onChangeInput}
         disabled={isTooLong}
         value={inputValue}
