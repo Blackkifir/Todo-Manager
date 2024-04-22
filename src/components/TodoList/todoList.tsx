@@ -10,7 +10,7 @@ import {
   setTodos,
   setTooLong,
 } from '../../redux/todosSlise';
-import AllTheTasks from '../AllTasks/AllTasks';
+import AllTheTasks from '../OverviewTasks/OverviewTasks';
 import Task from '../Task/Task';
 import TaskInput from '../TaskInput/TaskInput';
 

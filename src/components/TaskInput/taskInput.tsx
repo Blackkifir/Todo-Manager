@@ -10,25 +10,32 @@ export default function TaskInput({
   onClickSubmit,
 }: IPropsTaskInput) {
   return (
-    <form onSubmit={onSubmitForm} name="todos" className={styles.inputForm}>
-      <input
-        id="addTodoInput"
-        onChange={onChangeInput}
-        disabled={isTooLong}
-        value={inputValue}
-        name="todoAdd-item"
-        type="text"
-        placeholder="add item..."
-        className={styles.inputForm_input}
-      />
-      {isTooLong ? <p className={styles.inputForm_tooLong}>Too long words</p> : null}
-      <button
-        onClick={onClickSubmit}
-        type="button"
-        className={styles.inputForm_addBtn}
-      >
-        +
-      </button>
+    <form
+      onSubmit={onSubmitForm}
+      id="todos"
+      name="todos"
+      className={styles.form}
+    >
+      <div className={styles.form_inputBlock}>
+        <input
+          id="addTodoInput"
+          onChange={onChangeInput}
+          disabled={isTooLong}
+          value={inputValue}
+          name="todoAdd-item"
+          type="text"
+          placeholder="add task..."
+          className={styles.form_inputBlock_input}
+        />
+        {isTooLong ? <p className={styles.form_inputBlock_tooLong}>Too long words</p> : null}
+        <button
+          onClick={onClickSubmit}
+          type="submit"
+          className={styles.form_inputBlock_addBtn}
+        >
+          <span>+</span>
+        </button>
+      </div>
     </form>
   );
 }

@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.overviewTasks {
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  background-color: $white;
+
+  &_topFlex {
+    @include displayBetween();
+    margin-bottom: 20px;
+
+    &_title {
+      margin: 0;
+      font-size: 24px;
+      color: $ligthBlack;
+    }
+
+    &_icon {
+      font-size: 24px;
+      color: $blue;
+    }
+  }
+
+  &_summaryFlex {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    
+    &_item {
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      background-color: $white;
+      text-align: center;
+    }
+
+    &_title {
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: $ligthBlack;
+    }
+
+    &_value {
+      margin: 0;
+      font-size: 24px;
+      color: $blue;
+    }
+  }
+}
